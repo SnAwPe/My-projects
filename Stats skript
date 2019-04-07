@@ -1,0 +1,124 @@
+variables:
+	kills.%player% = 0
+	deaths.%player% = 0
+	blocks.%player% = 0
+	blocksplace.%player% = 0
+	gapples.%player% = 0
+	status.%player% = "&c&lOFFLINE"
+
+	
+on death:
+	attacker is a player
+	victim is a player
+	increase {kills.%attacker%} by 1
+	increase {deaths.%victim%} by 1
+
+on break:
+	increase {blocks.%player%} by 1
+	
+on consume of golden apple:
+	increase {gapples.%player%} by 1
+	
+on place:
+	increase {blocksplace.%player%} by 1
+		
+on first join:
+	set {firstjoin::%player's uuid%} to now
+	
+on join:
+	if {firstjoin::%player's uuid%} is not set:
+		set {firstjoin::%player's uuid%} to now
+	set {status.%player%} to "&a&lONLINE"
+	
+on quit:
+	set {status.%player%} to "&c&lOFFLINE"
+	
+on login:
+	set {lastlogin::%player's uuid%} to now
+	
+on logout:
+	set {location::%player's uuid%} to player's location
+	
+
+command /stats [<offlineplayer>]:
+	trigger:
+		if arg 1 is not set:
+			if {lastlogin::%player's uuid%} is not set:
+				set {lastlogin::%player's uuid%} to "&fIngen sidst kendte lokation"
+			set {_player} to "%player%" parsed as player
+			open chest with 3 rows named "&c&lDine &e&lStats" to player
+			format slot 0 of player with blue glass named "&f" to be unstealable
+			format slot 1 of player with red glass named "&f" to be unstealable
+			format slot 2 of player with blue glass named "&f" to be unstealable
+			format slot 3 of player with red glass named "&f" to be unstealable
+			format slot 4 of player with blue glass named "&f" to be unstealable
+			format slot 5 of player with red glass named "&f" to be unstealable
+			format slot 6 of player with blue glass named "&f" to be unstealable
+			format slot 7 of player with red glass named "&f" to be unstealable
+			format slot 8 of player with blue glass named "&f" to be unstealable
+			format slot 9 of player with red glass named "&f" to be unstealable
+			format slot 10 of player with blue glass named "&f" to be unstealable
+			format slot 11 of player with red glass named "&f" to be unstealable
+			format slot 12 of player with blue glass named "&f" to be unstealable
+			format slot 13 of player with skull of {_player} named "%player's displayname%" with lore "&eStatus: &f%{status.%player%}%||&eFirst join: &f%{firstjoin::%player's uuid%}%||&eSidste Login: &f%{lastlogin::%player's uuid%}%||&eLast Location: &f%{location::%player's uuid%}%||&eDeaths: &f%{deaths.%player%}%||&eKills: &f%{kills.%player%}%||&eBlocks Broken: &f%{blocks.%player%}%||&eBlocks Placed: &f%{blocksplace.%player%}%||&eGapples Eaten: &f%{gapples.%player%}%" to be unstealable
+			format slot 14 of player with blue glass named "&f" to be unstealable
+			format slot 15 of player with red glass named "&f" to be unstealable
+			format slot 16 of player with blue glass named "&f" to be unstealable
+			format slot 17 of player with red glass named "&f" to be unstealable
+			format slot 18 of player with blue glass named "&f" to be unstealable
+			format slot 19 of player with red glass named "&f" to be unstealable
+			format slot 20 of player with blue glass named "&f" to be unstealable
+			format slot 21 of player with red glass named "&f" to be unstealable
+			format slot 22 of player with blue glass named "&f" to be unstealable
+			format slot 23 of player with red glass named "&f" to be unstealable
+			format slot 24 of player with blue glass named "&f" to be unstealable
+			format slot 25 of player with red glass named "&f" to be unstealable
+			format slot 26 of player with blue glass named "&f" to be unstealable	
+		if arg 1 is set:
+			if {kills.%arg-1%} is not set:
+				set {kills.%arg-1%} to 0
+			if {deaths.%arg-1%} is not set:
+				set {deaths.%arg-1%} to 0
+			if {blocks.%arg-1%} is not set:
+				set {blocks.%arg-1%} to 0
+			if {blocksplace.%arg-1%} is not set:
+				set {blocksplace.%arg-1%} to 0
+			if {gapples.%arg-1%} is not set:
+				set {gapples.%arg-1%} to 0
+			if {status.%arg-1%} is not set:
+				set {status.%arg-1%} to "&c&lOFFLINE"
+			if {firstjoin::%arg-1's uuid%} is not set:
+				set {firstjoin::%arg-1's uuid%} to "&cPersonen har aldrig joinet"
+			if {location::%arg-1's uuid%} is not set:
+				set {location::%arg-1's uuid%} to "&cPersonen har aldrig joinet"
+			if {lastlogin::%arg-1's uuid%} is not set:
+				set {lastlogin::%arg-1's uuid%} to "&cPersonen har aldrig joinet"
+			set {_arg1} to "%arg-1%" parsed as offlineplayer
+			open chest with 3 rows named "&c&l%arg-1%'s &e&lStats" to player
+			format slot 0 of player with blue glass named "&f" to be unstealable
+			format slot 1 of player with red glass named "&f" to be unstealable
+			format slot 2 of player with blue glass named "&f" to be unstealable
+			format slot 3 of player with red glass named "&f" to be unstealable
+			format slot 4 of player with blue glass named "&f" to be unstealable
+			format slot 5 of player with red glass named "&f" to be unstealable
+			format slot 6 of player with blue glass named "&f" to be unstealable
+			format slot 7 of player with red glass named "&f" to be unstealable
+			format slot 8 of player with blue glass named "&f" to be unstealable
+			format slot 9 of player with red glass named "&f" to be unstealable
+			format slot 10 of player with blue glass named "&f" to be unstealable
+			format slot 11 of player with red glass named "&f" to be unstealable
+			format slot 12 of player with blue glass named "&f" to be unstealable
+			format slot 13 of player with skull of {_arg1} named "&c&l%arg-1%'s &e&lStats" with lore "&eStatus: &f%{status.%arg-1%}%||&eFirst join: &f%{firstjoin::%arg-1's uuid%}%||&eLast Login: &f%{lastlogin::%arg-1's uuid%}%||&eLast Location: &f%{location::%arg-1's uuid%}%||&eDeaths: &f%{deaths.%arg-1%}%||&eKills: &f%{kills.%arg-1%}%||&eBlocks Broken: &f%{blocks.%arg-1%}%||&eBlocks Placed: &f%{blocksplace.%arg-1%}%||&eGapples Eaten: &f%{gapples.%arg-1%}%" to be unstealable
+			format slot 14 of player with blue glass named "&f" to be unstealable
+			format slot 15 of player with red glass named "&f" to be unstealable
+			format slot 16 of player with blue glass named "&f" to be unstealable
+			format slot 17 of player with red glass named "&f" to be unstealable
+			format slot 18 of player with blue glass named "&f" to be unstealable
+			format slot 19 of player with red glass named "&f" to be unstealable
+			format slot 20 of player with blue glass named "&f" to be unstealable
+			format slot 21 of player with red glass named "&f" to be unstealable
+			format slot 22 of player with blue glass named "&f" to be unstealable
+			format slot 23 of player with red glass named "&f" to be unstealable
+			format slot 24 of player with blue glass named "&f" to be unstealable
+			format slot 25 of player with red glass named "&f" to be unstealable
+			format slot 26 of player with blue glass named "&f" to be unstealable	
