@@ -1,0 +1,43 @@
+command /on:
+	trigger:
+		Display board named "&6&lSie&e&lcraft" to player
+		Make score of "&cSpillere online:" in board of player to 30
+		Make score of "a%number of all players%" in board of player to 29
+		Make score of "&c" in board of player to 28
+		Make score of "&cDin rank:" in board of player to 27
+		Make score of "a%{score.%player%}%" in board of player to 26
+		Make score of "&c" in board of player to 25
+		Make score of "&cPenge:" in board of player to 24
+		Make score of "&a%player's balance%$" in board of player to 23
+		Make score of "&c" in board of player to 22
+		Make score of "&cDine kills:" in board of player to 21
+		Make score of "&a‰{kills.player}%" in board of player to 20
+		Make score of "&c" in board of player to in board of player to 19
+		Make score of "&cKillstreak:" in board of player to 18
+		Make score of "&a‰{killstreak.player}%" in board of player to 17
+		Make score of "&c" in board of player to 16
+		Make score of "&cDu har mined:" in board of player to 15
+		Make score of "&a%{blocks.break}%" in board of player to 14
+
+
+
+On kill:
+	add 1 to ‰{kills.player}%
+	add 1 to ‰{killstreak.player}%
+
+On death:
+	Set ‰{kills.player}% to 0
+
+On block break:
+	add 1 to %{blocks.break}%
+
+
+
+
+
+On join:
+	make player execute command "/on"
+
+
+Every 5 seconds:
+	make player execute command "/on"
